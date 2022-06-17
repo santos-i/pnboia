@@ -1,7 +1,7 @@
 flask==2.1.2
 dynaconf==3.1.9
 python-dotenv==0.20.0
-flask-sqlamchemy==2.5.1
+flask-sqlalchemy==2.5.1
 flask-wtf==1.0.1
 sqlalchemy_serializer==1.4.1
 
