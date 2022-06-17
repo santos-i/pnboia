@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1> Sign up </h1>
+<br>
+<form action="", method="post">
+    {{ form.hidden_tag() }}
+    <p>{{form.username.label}}<br>
+    {{form.username(placeholder='Username')}}<br>
+    </p>
+    <br>
+    <p>{{form.password1.label}}<br>
+    {{form.password1(placeholder='Password')}}<br>
+    </p>
+    <br>
+    <p>{{form.password2.label}}<br>
+        {{form.password2(placeholder='Password')}}<br>
+        </p>
+    <br>
+    <p>{{ form.submit() }}</p>
+    <br>
+    {% if error %}
+    <p class=error style="color:#FF0000"><strong>Error:</strong> {{ error }}
+    {% endif %}
+</form
+{% endblock %}
