@@ -1,6 +1,12 @@
 flask==2.1.2
 dynaconf==3.1.9
 python-dotenv==0.20.0
-flask-wtf==3.0.1
-flask-simplelogin==0.1.1
+flask-sqlamchemy==2.5.1
+flask-wtf==1.0.1
 sqlalchemy_serializer==1.4.1
+
+# Dash
+dash==2.5.1
+dash-bootstrap-components==1.1.0
+pandas==1.4.2
+

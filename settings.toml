@@ -1,4 +1,6 @@
 [default]
+
+SQLALCHEMY_TRACK_MODIFICATIONS='False'
 SQLALCHEMY_DATABASE_URI='sqlite:///database.db'
 
 SECRET_KEY = 'qualquer'
@@ -6,8 +8,9 @@ SECRET_KEY = 'qualquer'
 EXTENSIONS = [
     'application.extensions.database',
     'application.extensions.commands',
-
-
+    'application.extensions.dashboard.dash_boia',
 
     'application.blueprints.views',
+
+
 ]

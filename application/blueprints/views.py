@@ -1,15 +1,24 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, session
 from application.blueprints.forms import LoginForm, RegisterForm
 from application.extensions.database import db
 from application.models import User
+from application.blueprints.auth import login_required
 
 
 
 def init_app(app):
 
     @app.route('/home')
+    @login_required
     def home():
-        return render_template('home.html')
+        return redirect(url_for('dash'))
+
+    @app.route('/alcatrazes')
+    @login_required
+    def dash():
+        return 'ok'
+
+
 
     @app.route('/', methods=['GET','POST'])
     def signin():
@@ -19,6 +28,7 @@ def init_app(app):
             user = User.query.filter_by(username=form.username.data).first()
             if user:
                 if user.password == form.password.data:
+                    session['username'] = user.username
                     return redirect(url_for('home'))
                 else:
 
@@ -46,3 +56,14 @@ def init_app(app):
                 error = 'Passwords do no match!'
 
         return render_template('signup.html', form=form, error=error)
+
+
+    @app.route('/alcatrazes/logout')
+    def logout():
+
+        if not session.get('username'):
+            return redirect(url_for('signin'))
+
+        session['username'] = False
+        session.pop('username',None)
+        return redirect(url_for('signin'))
