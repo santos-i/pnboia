@@ -38,7 +38,7 @@ app_layout = dbc.Container(
 def init_app(server): #server = app Flask
     dash_app = Dash(
         server=server,
-        routes_pathname_prefix="/alcatrazes/",
+        routes_pathname_prefix='/dash_boia/',
         external_stylesheets=[dbc.themes.BOOTSTRAP],
     )
     dash_app.layout = app_layout
@@ -63,7 +63,7 @@ def init_app(server): #server = app Flask
             return temperature
 
 
-    return dash_app.server
+        return dash_app.server
 
 
 if __name__ == "__main__":
