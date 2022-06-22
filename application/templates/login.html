@@ -15,8 +15,14 @@
     {{form.submit()}}
     <br>
     <a href="{{url_for('signup')}}"> Create a new account! </a>
-    {% if error %}
-        <p class=error style="color:#FF0000" ><strong>Error:</strong> {{ error }}
-    {% endif %}
 </form>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  <ul class=flashes>
+  {% for message in messages %}
+    <li class=error ><strong style="color:#FF0000">Error: {{ message }}</strong></li>
+  {% endfor %}
+  </ul>
+{% endif %}
+{% endwith %}
 {% endblock %}

@@ -19,3 +19,9 @@ class User(db.Model, UserMixin):
 
     def is_anonymous(self):
         return False
+    
+    def check_password(self,password):
+        if self.password == password:
+            print('TRUUUUUUUUUE')
+            return True
+        return False

@@ -18,8 +18,15 @@
     <br>
     <p>{{ form.submit() }}</p>
     <br>
-    {% if error %}
-    <p class=error style="color:#FF0000"><strong>Error:</strong> {{ error }}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class=flashes>
+      {% for message in messages %}
+        <li class=error ><strong style="color:#FF0000">Error: {{ message }}</strong></li>
+      {% endfor %}
+      </ul>
     {% endif %}
+    {% endwith %}
 </form
+
 {% endblock %}
