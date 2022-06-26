@@ -5,7 +5,7 @@ BUOYS = [
     'bc1',
     'keller',
     'pinguim',
-    'potter',
+    '_potter',
     'abrolhos',
     'trindade',
     'bmo_santos',
