@@ -60,15 +60,9 @@ for key, value in data_urls_dict.items():
     engine = create_engine('sqlite:///database.db')
     conn = engine.connect()
 
-    try:
-        df = pd.read_sql(key,con=conn)
-        df = df.set_index('Datetime')
-        df = pd.concat([df,df_temp]).drop_duplicates()
-        df_temp.to_sql(key, con=conn, if_exists='replace')
-        print(key, 'inserida no db')
-    except:
-        df_temp.to_sql(key, con=conn, if_exists='replace')
-
+    df_temp.to_sql(key, con=conn, if_exists='replace')
+    print(key, 'inserido no db')
+        
 df_status = df_status.sort_values('last_aquisition', ascending=False, ignore_index=True)
 df_status.to_sql('buoyStatus', con=conn, if_exists='replace')
 print('status inserido no db')
