@@ -60,26 +60,26 @@ def init_app(server): #server = app Flask
         if view_func.startswith('/dash_boia/'):
             dash_app.server.view_functions[view_func] = login_required(dash_app.server.view_functions[view_func])
 
-    # @dash_app.callback(Output("content", "children"), [Input("tabs", "active_tab")])
-    # def render_content(tab):
-    #     if tab == 'position':
-    #         position = positionContent()
-    #         return position
+    @dash_app.callback(Output("content", "children"), [Input("tabs", "active_tab")])
+    def render_content(tab):
+        if tab == 'position':
+            position = positionContent()
+            return position
 
-    #     elif tab == 'wind':
-    #         wind = windContent()
-    #         return wind
+        elif tab == 'wind':
+            wind = windContent()
+            return wind
 
-    #     elif tab == 'wave':
-    #         wave = waveContent()
-    #         return wave
+        elif tab == 'wave':
+            wave = waveContent()
+            return wave
                 
-    #     elif tab == 'temperature':
-    #         temperature = temperatureContent()
-    #         return temperature
+        elif tab == 'temperature':
+            temperature = temperatureContent()
+            return temperature
 
 
-    #     return dash_app.server
+        return dash_app.server
 
 
 if __name__ == "__main__":

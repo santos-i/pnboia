@@ -1,12 +1,16 @@
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 import bs4
 import urllib.request
 import pandas as pd
 from io import StringIO
-from sqlalchemy import create_engine
 from re import search 
 from constants import BUOYS,URL,FILE_URL
+from sqlalchemy import create_engine
+# import psycopg2
 
+
+db = create_engine('postgresql://postgres:Senha.123@localhost:5432/pnboia')
+conn = db.connect()
 
 def return_soup(link):
     page = urllib.request.urlopen(link).read()
@@ -53,16 +57,25 @@ for key, value in data_urls_dict.items():
     else: status = 'Manutenção'
     
     dic= {'buoy':[key], 'status':[status], 'last_aquisition':[last_aquisition]}
+
     df_fromDic = pd.DataFrame.from_dict(dic)
     df_status = pd.concat([df_status, df_fromDic], ignore_index=True)
 
-    # create connection sql
-    engine = create_engine('sqlite:///database.db')
-    conn = engine.connect()
+    df_last = pd.read_sql(f'SELECT * FROM {key};',con=conn)
+    df_last = df_last.set_index('Datetime')
+    df_temp = pd.concat([df_last, df_temp], ignore_index=False)
+    
+    df_temp = df_temp.drop_duplicates()
+    df_temp = df_temp.sort_index(ascending=False)
+    
+    #limitar em 1 ano de dado
+    # df_temp.index = pd.to_datetime(df_temp.index)
+    # df_temp = df_temp[df_temp.index >= df_temp.index[0]- timedelta(days=365)]
 
-    df_temp.to_sql(key, con=conn, if_exists='replace')
-    print(key, 'inserido no db')
-        
+    df_temp.to_sql(name=key, con=conn, if_exists='replace')
+    print(key, 'ok')
+
+
 df_status = df_status.sort_values('last_aquisition', ascending=False, ignore_index=True)
-df_status.to_sql('buoyStatus', con=conn, if_exists='replace')
-print('status inserido no db')
+df_status.to_sql(name='buoyStatus', con=conn, if_exists='replace')
+print('dfstatus ok')

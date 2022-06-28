@@ -13,7 +13,7 @@ def init_app(app):
     @app.route('/home')
     @login_required
     def home():
-        return redirect(url_for('/dash_boia/'))
+        return render_template('home.html')
 
 
     @app.route('/', methods=['GET', 'POST'])
@@ -34,7 +34,6 @@ def init_app(app):
             login_user(user)
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
-                flash('You were successfully logged in')
                 next_page = url_for('home')
             return redirect(next_page)
         return render_template('login.html', form=form,)

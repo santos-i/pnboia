@@ -11,3 +11,10 @@ dash==2.5.1
 dash-bootstrap-components==1.1.0
 pandas==1.4.2
 
+# pnboia
+bs4==-0.0.1
+
+
+
+#teste postgresql
+psycopg2==2.9.3 
