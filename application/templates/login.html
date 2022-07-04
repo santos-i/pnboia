@@ -1,28 +1,36 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1> Sign In </h1>
-<br>
-<form action="", method="post">
-    {{ form.hidden_tag() }}
-    <p>{{form.username.label}}<br>
+<body>
+<section class="hero">
+<div class="hero-body">
+<div class="container has-text-centered">
+    <h1> Sign In </h1>
+    <br>
+    <form action="", method="post">
+      {{ form.hidden_tag() }}
+      <p>{{form.username.label}}<br>
         {{form.username(placeholder='Username')}}<br>
-    </p>
-    <br>
-    {{form.password.label}}<br>
-    {{form.password(placeholder='Password')}}
-    <br>
-    <br>
-    {{form.submit()}}
-    <br>
-    <a href="{{url_for('signup')}}"> Create a new account! </a>
-</form>
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-  <ul class=flashes>
-  {% for message in messages %}
-    <li class=error ><strong style="color:#FF0000">Error: {{ message }}</strong></li>
-  {% endfor %}
-  </ul>
-{% endif %}
-{% endwith %}
+      </p>
+      <br>
+      {{form.password.label}}<br>
+      {{form.password(placeholder='Password')}}
+      <br>
+      <br>
+      {{form.submit()}}
+      <br>
+      <a href="{{url_for('signup')}}"> Create a new account! </a>
+    </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+      {% for message in messages %}
+      <li class=error ><strong style="color:#FF0000">Error: {{ message }}</strong></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</div>
+</div>
+</section>
+</body>
 {% endblock %}

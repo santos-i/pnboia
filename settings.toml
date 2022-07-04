@@ -9,9 +9,8 @@ EXTENSIONS = [
     'application.extensions.database',
     'application.extensions.commands',
     'application.extensions.auth',
-    'application.extensions.dashboard.dash_boia',
 
-    'application.blueprints.views',
+    'application.blueprints.routes',
 
 
 ]

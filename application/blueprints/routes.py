@@ -1,4 +1,3 @@
-from flask_login import login_user, login_required, logout_user
 from flask import render_template, flash, redirect, url_for, request, session
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.urls import url_parse
@@ -13,6 +12,7 @@ def init_app(app):
     @app.route('/home')
     @login_required
     def home():
+        
         return render_template('home.html')
 
 
@@ -64,3 +64,8 @@ def init_app(app):
 
         return render_template('signup.html', form=form,)
 
+
+    @app.route('/newpass')
+    def password():
+        form = LoginForm()
+        return render_template('password.html', form=form)

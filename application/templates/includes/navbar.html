@@ -1,0 +1,44 @@
+<div class="container is-fluid">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item">
+            <img src="static/imgs/brand.png">
+            </a>
+        </div>
+        
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+            <a class="navbar-item">
+                Home
+            </a>
+        
+            <a class="navbar-item">
+                Tabela boias
+            </a>
+            </div>
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                    {{ current_user.username.title() }}
+                    </a>
+            <br><br>
+                    <div class="navbar-dropdown">
+                    <a class="navbar-item" href="{{url_for('password')}}">
+                        Password
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item" href="{{url_for('logout')}}">
+                        Logout
+                    </a>
+                    </div>
+                </div>
+                <br><br>
+                </div>
+            </div>
+
+        </div>
+        <hr class="navbar-divider">
+    </nav>
+</div>
+
