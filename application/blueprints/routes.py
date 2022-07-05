@@ -5,18 +5,32 @@ from werkzeug.urls import url_parse
 from application.blueprints.forms import LoginForm, RegisterForm
 from application.extensions.database import db
 from application.models import User
+import pandas as pd
 
 
 def init_app(app):
         
-    @app.route('/home')
-    @login_required
+    @app.route('/')
     def home():
+        text = 'text'
         
-        return render_template('home.html')
+        return render_template('home.html', text=text)
 
 
-    @app.route('/', methods=['GET', 'POST'])
+    @app.route('/buoy-table')
+    def table():
+
+        buoyStatus = pd.read_sql('buoyStatus', db.engine).drop(columns=['index'])
+        print(buoyStatus)
+        
+        return render_template(
+            'table.html', 
+            tables=[buoyStatus.to_html(classes='Status')], 
+        )
+
+
+
+    @app.route('/login', methods=['GET', 'POST'])
     def login():
         if current_user.is_authenticated:
             return redirect(url_for('home'))
@@ -34,16 +48,16 @@ def init_app(app):
             login_user(user)
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
-                next_page = url_for('home')
+                next_page = url_for('table')
             return redirect(next_page)
-        return render_template('login.html', form=form,)
+        return render_template('login.html', form=form)
 
 
     @app.route('/logout')
     def logout():
         session.pop('username', None)
         logout_user()
-        return redirect(url_for('login'))
+        return redirect(url_for('home'))
     
 
     @app.route('/signup', methods=['GET','POST'])

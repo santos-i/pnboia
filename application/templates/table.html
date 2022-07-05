@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container is-max-widescreen">
+    <table class='table mx-auto' >    
+        {% for table in tables %}
+        {{ table|safe }}
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
