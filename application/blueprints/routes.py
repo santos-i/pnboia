@@ -35,6 +35,7 @@ def init_app(app):
             'table.html', 
             data_values=buoyStatus.values,
             data_headings = buoyStatus.columns.values,
+
         )
 
 
