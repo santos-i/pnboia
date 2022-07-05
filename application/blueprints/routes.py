@@ -16,8 +16,16 @@ def init_app(app):
         
         return render_template('home.html', text=text)
 
+    @app.route('/<id>')
+    @login_required
+    def generic(id=None):
+        text = f'{id}'
+        
+        return render_template('buoy.html', text=text)
+
 
     @app.route('/buoy-table')
+    @login_required
     def table():
 
         buoyStatus = pd.read_sql('buoyStatus', db.engine).drop(columns=['index'])
@@ -25,7 +33,8 @@ def init_app(app):
         
         return render_template(
             'table.html', 
-            tables=[buoyStatus.to_html(classes='Status')], 
+            data_values=buoyStatus.values,
+            data_headings = buoyStatus.columns.values,
         )
 
 

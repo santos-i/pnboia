@@ -1,10 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container is-max-widescreen">
-    <table class='table mx-auto' >    
-        {% for table in tables %}
-        {{ table|safe }}
-        {% endfor %}
+
+<div class="container is-max-desktop" >
+    <h1><strong> Tabela de boias</strong></h1>
+    <br>
+    <table class='table is-bordered is-striped is-narrow is-hoverable'>
+        <tr>
+            {% for header in data_headings %}
+            <th>{{ header }}</th>
+            {% endfor %}
+        </tr>
+        
+        <tr>
+            {% for row in data_values %}
+            <tr>
+                {% for cell in row %}
+                {% if cell==row[0] %}
+                <td><a href="{{cell}}">{{ cell }}</a></td>
+                {% else %}
+                <td>{{ cell }}</td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            
+        </tr>
     </table>
 </div>
-{% endblock %}
+    {% endblock %}
