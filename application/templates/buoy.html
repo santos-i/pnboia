@@ -29,19 +29,39 @@
 
 <br>
     <div id="position-tab-content">
-        {{ div_placeholder|safe }}
-    </div>
+        {{ div_map |safe }}
+      </div>
       
-    <div class="is-hidden" id="wind-tab-content">
-        <h1 class="title is-1" style="text-align:center;">
-            WIND 
-        </h1>
+      <div class="is-hidden" id="wind-tab-content">
+        <div class="level">
+          <div class="level-left">
+            <div class="level-item">
+              {{ div_wind |safe }}
+            </div>
+          </div>
+          
+          <div class="level-right">
+            <div class="level-item">
+              {{ div_windrose |safe }}
+            </div>
+            </div>
+        </div>
     </div>
 
     <div class="is-hidden" id="wave-tab-content">
-        <h1 class="title is-1" style="text-align:center;">
-            Wave
-        </h1>
+      <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            {{ div_wave |safe }}
+          </div>
+        </div>
+        
+        <div class="level-right">
+          <div class="level-item">
+            {{ div_waverose |safe }}
+          </div>
+          </div>
+      </div>
     </div>
 
 </div>
