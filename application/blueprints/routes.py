@@ -1,3 +1,4 @@
+from turtle import title
 from flask import render_template, flash, redirect, url_for, request, session
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.urls import url_parse
@@ -5,7 +6,11 @@ from werkzeug.urls import url_parse
 from application.blueprints.forms import LoginForm, RegisterForm
 from application.extensions.database import db
 from application.models import User
+
+import plotly.graph_objects as go
 import pandas as pd
+
+
 
 
 def init_app(app):
@@ -16,12 +21,49 @@ def init_app(app):
         
         return render_template('home.html', text=text)
 
-    @app.route('/<id>')
+    @app.route('/<buoy>')
     @login_required
-    def generic(id=None):
-        text = f'{id}'
+    def generic(buoy=None):
+
+        outrafig = go.Figure(go.Scattermapbox(
+            mode = "markers+lines",
+            lon = [10, 20, 30],
+            lat = [10, 20,30],
+            marker = {'size': 10}))
+
+        outrafig.add_trace(go.Scattermapbox(
+            mode = "markers+lines",
+            lon = [-50, -60,40],
+            lat = [30, 10, -20],
+            marker = {'size': 10}))
+
+        outrafig.update_layout(
+            margin ={'l':0,'t':0,'b':0,'r':0},
+            mapbox = {
+                'center': {'lon': 10, 'lat': 10},
+                'style': "stamen-terrain",
+                'center': {'lon': -20, 'lat': -20},
+                'zoom': 1})
+
+        outrafig = outrafig.to_html(full_html=False)
+
+        return render_template(
+            'buoy.html', 
+            buoy=buoy,
+            div_placeholder=outrafig,
+
+        )
+
+
+    @app.route('/<buoy>/<type>')
+    @login_required
+    def generic2(buoy=None, type=None):
         
-        return render_template('buoy.html', text=text)
+        
+        return render_template(
+            'buoy2.html', 
+            buoy=buoy,
+        )
 
 
     @app.route('/buoy-table')

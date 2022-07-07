@@ -5,22 +5,13 @@
     <div class="content has-text-centered">
     <h1><strong> Tabela de boias</strong></h1>
     <br>
-    <table class='table is-bordered is-striped is-narrow is-hoverable'
-    data-toggle="table"
-    data-filter-control="true"
-    data-show-search-clear-button="true"
-    data-sortable="true"
-    data-pagination="true"
-    data-show-columns="true"
-    data-show-columns-toggle-all="true"
-    class="table-responsive"
-    >
+    <table id='data' class='table is-bordered is-striped is-narrow is-hoverable'>
         <tr>
             {% for header in data_headings %}
             <th>{{ header }}</th>
             {% endfor %}
         </tr>
-        
+  
         <tr>
             {% for row in data_values %}
             <tr>
@@ -38,4 +29,9 @@
     </table>
     </div>
 </div>
-    {% endblock %}
+<script>
+  $(document).ready( function () {
+    $('#data').DataTable();
+  } );
+</script>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container is-fluid">
+    {{ buoy/position }}
+    <div class="tabs is-centered">
+        <ul>
+            <li class="is-active"><a href="{{ buoy/position }}">Position</a></li>
+            <li><a>Music</a></li>
+            <li><a>Videos</a></li>
+            <li><a>Documents</a></li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}
